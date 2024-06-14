@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Guía de modelo de WRF para cluster</title>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <a href="index.html" class="hiper-title">
+                <h1 class="main-title">Guía de Modelo WRF para Cluster</h1>
+            </a>
+            
+            <hr class="line">
+            <ul class="list">
+                <li><a href="Introduction.html">Introdución</a></li>
+                <li><a href="PasoAPaso.html">Paso a Paso</a></li>
+                <li><a href="Conclusiones.html">Conclusiones</a></li>
+            </ul>
+            <hr class="line">
+            <div class="logos">
+                <a href="#"><img class="image-logo" src="./assets/img/facebook.png" alt="" ></a>
+                <a href="#"><img class="image-logo" src="./assets/img/whatsapp.png" alt=""></a>
+                <a href="#"><img class="image-logo" src="./assets/img/twitter.png" alt=""></a>
+                <a href="#"><img class="image-logo" src="./assets/img/linkedin.png" alt=""></a>
+                <a href="#"><img class="image-logo" src="./assets/img/youtube.png" alt=""></a>
+            </div>
+            
+        </div>
+        <div class="main">
+            <article class="post">
+                <div class="post-title">
+                    <img class="img-title" src="https://insidehpc.com/wp-content/uploads/2015/10/maxresdefault-1024x576.jpg" alt="">
+                    <h1 class="blog-title">Paso a Paso</h1>
+                    <p class="parrafo">
+                        Configurar un clúster desde cero para ejecutar el modelo Weather Research and Forecasting (WRF) en paralelo utilizando MPI y SLURM es una tarea que requiere varios pasos técnicos. A continuación, te proporciono una guía detallada paso a paso para configurar un clúster de computación de alto rendimiento (HPC) para ejecutar el modelo WRF.
+                    </p>
+                    <h1 class="blog-title">Paso 1: Configuración del Hardware</h1>
+                    <h3 class="blog-subtitle">Componentes Necesarios</h3>
+                    <ol class="order-list">
+                        <li><b>Nodos de Cómputo:</b> Varios servidores con procesadores multicore, suficiente memoria RAM y almacenamiento.</li>
+                        <li><b>Nodo de Cabeza (Head Node):</b> Un servidor que actúe como nodo maestro para gestionar el clúster.</li>
+                        <li><b>Red:</b>Una red de alta velocidad (por ejemplo, Infiniband) para interconectar los nodos de cómputo.</li>
+                    </ol>
+                    <h1 class="blog-title">Paso 2: Instalación del Sistema Operativo</h1>
+                    <p class="parrafo">
+                        Instala una distribución de Linux en todos los nodos. CentOS, Ubuntu o cualquier otra distribución compatible con WRF y MPI son buenas opciones. Asegúrate de que todos los nodos tienen la misma versión del sistema operativo.
+                    </p>
+                </div>
+                
+                
+            </article>
+        </div>
+        
+    </div>
+    
+</body>
+</html>
