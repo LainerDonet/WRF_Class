@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Guía de modelo de WRF para cluster</title>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <a href="index.html" class="hiper-title">
+                <h1 class="main-title">Guía de Modelo WRF para Cluster</h1>
+            </a>
+            
+            <hr class="line">
+            <ul class="list">
+                <li><a href="Introduction.html">Introdución</a></li>
+                <li>
+                    <a href="PasoAPaso.html">Paso a Paso</a>
+                    <ul class="list">
+                        <li><a href="ConfiguraciondeHardware.html">Configuarión de Hardware</a> </li>
+                        <li><a href="slurm.html">Configuarión de SLURM</a> </li>
+                        <li><a href="wrfsetup.html">Configuarión del Modelo WRF</a> </li>
+                        <li><a href="monitoreoygestión.html">Monitoreo y Gestion</a> </li>
+                    </ul>
+                </li>
+                <li><a href="Conclusiones.html">Conclusiones</a></li>
+            </ul>
+            <hr class="line">
+            <div class="logos">
+                <a href="#"><img class="image-logo" src="./assets/img/facebook.png" alt="" ></a>
+                <a href="#"><img class="image-logo" src="./assets/img/whatsapp.png" alt=""></a>
+                <a href="#"><img class="image-logo" src="./assets/img/twitter.png" alt=""></a>
+                <a href="#"><img class="image-logo" src="./assets/img/linkedin.png" alt=""></a>
+                <a href="#"><img class="image-logo" src="./assets/img/youtube.png" alt=""></a>
+            </div>
+            
+        </div>
+        <div class="main">
+            <article class="post">
+                <div class="post-title">
+                    <img class="img-title" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Typhoon_Mawar_2005_computer_simulation_thumbnail.gif/250px-Typhoon_Mawar_2005_computer_simulation_thumbnail.gif" alt="" width="300" height="200">
+                    <h1 class="blog-title">Paso 6: Descarga y Compilación de WRF</h1>
+                    <ol class="order-list">
+                        <li>
+                            <h3 class="blog-subtitle">Descargar WRF y WPS</h3>
+                            <p class="parrafo">Descarga el código fuente de WRF y WPS desde el sitio oficial.</p>
+                        </li>
+                        <li>
+                            <h3 class="blog-subtitle">Configurar SLURM</h3>
+                            <p class="parrafo">Configurar y Compilar WRF</p>
+                            <pre><code>
+cd WRF
+./configure
+./compile em_real >& compile.log &
+                            </code></pre>
+                        </li>
+                        <li>
+                            <h3 class="blog-subtitle">Configurar y Compilar WPS</h3>
+                            <pre><code>
+cd WPS
+./configure
+./compile >& compile.log &
+                            </code></pre>
+                        </li>
+                    </ol>
+                    <h3 class="blog-subtitle">Nota</h3>
+                    <p class="parrafo">Para una iunstalación correcta de WRF utilizar el siguiente guía:</p>
+                    <a href="#">Guía de instalación de WRF</a>
+
+                    <h1 class="blog-title">Paso 7: Ejecución del Modelo WRF</h1>
+                    <ol class="order-list">
+                        <li>
+                            <h3 class="blog-subtitle"> Preparar el Entorno</h3>
+                            <p class="parrafo"> Asegúrate de que todos los nodos tienen acceso a los archivos necesarios para la ejecución de WRF.</p>
+                        </li>
+                        <li>
+                            <h3 class="blog-subtitle">Script de Envío SLURM</h3>
+                            <p>Crea un script de envío para SLURM. Aquí tienes un ejemplo:</p>
+                            <pre><code>
+#!/bin/bash
+#SBATCH --job-name=wrf_simulation
+#SBATCH --nodes=4
+#SBATCH --ntasks-per-node=8
+#SBATCH --time=48:00:00
+#SBATCH --partition=debug
+#SBATCH --output=wrf_output_%j.log
+
+module load gcc/9.3.0
+module load openmpi/4.0.3
+module load netcdf/4.7.4
+module load hdf5/1.10.6
+
+cd /path/to/your/wrf/rundir
+
+# Link the necessary WPS output files
+ln -sf /path/to/your/WPS/met_em* .
+
+# Run the WRF model
+mpirun -np 32 ./wrf.exe
+                            </code></pre>
+                        </li>
+                        <li>
+                            <h3 class="blog-subtitle">Enviar el Trabajo a SLURM</h3>
+                            <p class="parrafo">Envía el trabajo a SLURM usando el siguiente comando:</p>
+                            <span><code>sbatch wrf_run.sh</code></span>
+                        </li>
+                    </ol>
+                    
+                </div>
+                
+                
+            </article>
+        </div>
+        
+    </div>
+    
+</body>
+</html>

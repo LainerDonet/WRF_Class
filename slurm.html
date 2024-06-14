@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Guía de modelo de WRF para cluster</title>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <a href="index.html" class="hiper-title">
+                <h1 class="main-title">Guía de Modelo WRF para Cluster</h1>
+            </a>
+            
+            <hr class="line">
+            <ul class="list">
+                <li><a href="Introduction.html">Introdución</a></li>
+                <li>
+                    <a href="PasoAPaso.html">Paso a Paso</a>
+                    <ul class="list">
+                        <li><a href="ConfiguraciondeHardware.html">Configuarión de Hardware</a> </li>
+                        <li><a href="slurm.html">Configuarión de SLURM</a> </li>
+                        <li><a href="wrfsetup.html">Configuarión del Modelo WRF</a> </li>
+                        <li><a href="monitoreoygestión.html">Monitoreo y Gestion</a> </li>
+                    </ul>
+                </li>
+                <li><a href="Conclusiones.html">Conclusiones</a></li>
+            </ul>
+            <hr class="line">
+            <div class="logos">
+                <a href="#"><img class="image-logo" src="./assets/img/facebook.png" alt="" ></a>
+                <a href="#"><img class="image-logo" src="./assets/img/whatsapp.png" alt=""></a>
+                <a href="#"><img class="image-logo" src="./assets/img/twitter.png" alt=""></a>
+                <a href="#"><img class="image-logo" src="./assets/img/linkedin.png" alt=""></a>
+                <a href="#"><img class="image-logo" src="./assets/img/youtube.png" alt=""></a>
+            </div>
+            
+        </div>
+        <div class="main">
+            <article class="post">
+                <div class="post-title">
+                    <img class="img-title" src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Slurm_logo.svg" alt="" width="300" height="200">
+                    <h1 class="blog-title">Paso 5: Configuración de SLURM</h1>
+                    <ol class="order-list">
+                        <li>
+                            <h3 class="blog-subtitle">Instalar SLURM</h3>
+                            <p class="parrafo">Sigue estos pasos en todos los nodos para instalar SLURM:</p>
+                            <span><code>sudo apt-get install -y slurm-wlm</code></span>
+                        </li>
+                        <li>
+                            <h3 class="blog-subtitle">Configurar SLURM</h3>
+                            <p class="parrafo">Edita los archivos de configuración de SLURM en el nodo de cabeza.:</p>
+                            <p class="parrafo"><i class="inclinada">slurm.conf</i></p>
+                            <p class="parrafo">Este archivo debe estar ubicado en <i class="inclinada">/etc/slurm-llnl/slurm.conf</i>. Aquí tienes un ejemplo de configuración básica:</p>
+                            <pre><code>
+ControlMachine=head-node
+SlurmUser=slurm
+AuthType=auth/munge
+StateSaveLocation=/var/spool/slurm-llnl
+SlurmdSpoolDir=/var/spool/slurmd
+SlurmctldPidFile=/var/run/slurmctld.pid
+SlurmdPidFile=/var/run/slurmd.pid
+ProctrackType=proctrack/linuxproc
+ReturnToService=1
+SlurmdPort=6818
+SlurmdPort=6817
+SlurmdPortRange=6817-6818
+SlurmdLogFile=/var/log/slurmd.log
+SlurmctldLogFile=/var/log/slurmctld.log
+
+# Define Node and Partition Configurations
+NodeName=compute[0-3] CPUs=16 State=UNKNOWN
+PartitionName=debug Nodes=ALL Default=YES MaxTime=INFINITE State=UP
+                            </code></pre>
+                        </li>
+                        <li>
+                            <h3 class="blog-subtitle">Configurar Munge</h3>
+                            <p class="parrafo">SLURM utiliza Munge para autenticación. Instálalo y configúralo en todos los nodos:</p>
+                            <span><code>sudo apt-get install -y munge</code></span><br>
+                            <span><code>sudo /etc/init.d/munge start</code></span>
+                        </li>
+                        <li>
+                            <h3 class="blog-subtitle"> Iniciar SLURM</h3>
+                            <p class="parrafo">En el nodo de cabeza:</p>
+                            <span><code>sudo systemctl start slurmctld</code></span>
+                            <p class="parrafo">
+                                En cada nodo de cómputo:
+                            </p>
+                            <span><code>sudo systemctl start slurmd</code></span>
+                        </li>
+                        
+                    </ol>
+                   
+                    
+                </div>
+                
+                
+            </article>
+        </div>
+        
+    </div>
+    
+</body>
+</html>

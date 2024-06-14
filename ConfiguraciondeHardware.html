@@ -40,22 +40,29 @@
         <div class="main">
             <article class="post">
                 <div class="post-title">
-                    <img class="img-title" src="https://insidehpc.com/wp-content/uploads/2015/10/maxresdefault-1024x576.jpg" alt="">
-                    <h1 class="blog-title">Paso a Paso</h1>
-                    <p class="parrafo">
-                        Configurar un clúster desde cero para ejecutar el modelo Weather Research and Forecasting (WRF) en paralelo utilizando MPI y SLURM es una tarea que requiere varios pasos técnicos. A continuación, te proporciono una guía detallada paso a paso para configurar un clúster de computación de alto rendimiento (HPC) para ejecutar el modelo WRF.
-                    </p>
-                    <h1 class="blog-title">Paso 1: Configuración del Hardware</h1>
-                    <h3 class="blog-subtitle">Componentes Necesarios</h3>
+                    <img class="img-title" src="https://raw.githubusercontent.com/SCW-Aberystwyth/Introduction-to-HPC-with-RaspberryPi/gh-pages/fig/cluster-generic.png" alt="" width="300" height="200">
+                    <h1 class="blog-title">Paso 3: Configuración de la Red</h1>
                     <ol class="order-list">
-                        <li><b>Nodos de Cómputo:</b> Varios servidores con procesadores multicore, suficiente memoria RAM y almacenamiento.</li>
-                        <li><b>Nodo de Cabeza (Head Node):</b> Un servidor que actúe como nodo maestro para gestionar el clúster.</li>
-                        <li><b>Red:</b>Una red de alta velocidad (por ejemplo, Infiniband) para interconectar los nodos de cómputo.</li>
+                        <li><b>Configuración de la Red Interna:</b> Asigna direcciones IP estáticas a todos los nodos de cómputo y al nodo de cabeza.</li>
+                        <li><b>SSH Sin Contraseña:</b>  Configura el acceso SSH sin contraseña desde el nodo de cabeza a todos los nodos de cómputo.</li>
+                        <span><code>ssh-keygen -t rsa</code></span> <br>
+                        <span><code>ssh-copy-id user@compute-node</code></span>
                     </ol>
-                    <h1 class="blog-title">Paso 2: Instalación del Sistema Operativo</h1>
-                    <p class="parrafo">
-                        Instala una distribución de Linux en todos los nodos. CentOS, Ubuntu o cualquier otra distribución compatible con WRF y MPI son buenas opciones. Asegúrate de que todos los nodos tienen la misma versión del sistema operativo.
-                    </p>
+                    <h1 class="blog-title">Paso 4: Instalación de las Dependencias</h1>
+                    <ol class="order-list">
+                        <li>
+                            <h3 class="blog-subtitle">Instala los Compiladores y MPI</h3>
+                            <p class="parrafo">En cada nodo, instala GCC y una implementación de MPI, como OpenMPI o MPICH.</p>
+                            <span><code>sudo apt-get update</code></span>
+                            <span><code>sudo apt-get install -y build-essential gcc gfortran openmpi-bin openmpi-common libopenmpi-dev</code></span>
+                        </li>
+                        <li>
+                            <h3 class="blog-subtitle">Instala NetCDF y HDF5</h3>
+                            <p class="parrafo">Instala las bibliotecas NetCDF y HDF5 necesarias para WRF..</p>
+                            <span><code>sudo apt-get install -y libnetcdf-dev libnetcdff-dev libhdf5-serial-dev</code></span>
+                        </li>
+                    </ol>
+                    
                 </div>
                 
                 
