@@ -1,8 +1,8 @@
+@import url(fontawesome-all.min.css);
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: sans-serif;
 }
 .container {
   height: 100vh;
@@ -11,8 +11,8 @@
     "sidebar Main"
     "sidebar Main";
   grid-gap: 0.6rem;
-  grid-template-columns: 0.8fr 2.5fr;
-  grid-template-rows: 0.8fr 2.5fr ;
+  grid-template-columns: 20% auto;
+  grid-template-rows: auto auto ;
 }
 .sidebar {
   grid-area: sidebar;
@@ -44,9 +44,56 @@
     padding-left: 20px;
     padding-bottom: 20px;
 }
-.logos img{
-    margin: 0px;
+
+/* ul icons */
+.icons {
+  list-style: none;
+  padding: 0;
+  text-align: center;
 }
+
+.icons li {
+  display: inline-block; /* o 'inline' si prefieres */
+  margin-right: 5px; /* espacio entre logos */
+}
+
+.facebook-logo {
+  background-image: url('./assets/img/facebook.png');
+  display: block;
+  width: 20px; /* o el tamaño que prefieras */
+  height: 20px; /* o el tamaño que prefieras */
+  background-size: cover;
+}
+
+.twitter-logo {
+  background-image: url('./assets/img/twitter.png');
+  display: block;
+  width: 20px; /* o el tamaño que prefieras */
+  height: 20px; /* o el tamaño que prefieras */
+  background-size: cover;
+}
+.linkedin-logo {
+  background-image: url('./assets/img/linkedin.png');
+  display: block;
+  width: 20px; /* o el tamaño que prefieras */
+  height: 20px; /* o el tamaño que prefieras */
+  background-size: cover;
+}
+.email-logo {
+  background-image: url('./assets/img/email.png');
+  display: block;
+  width: 20px; /* o el tamaño que prefieras */
+  height: 20px; /* o el tamaño que prefieras */
+  background-size: cover;
+}
+.youtube-logo {
+  background-image: url('./assets/img/youtube.png');
+  display: block;
+  width: 20px; /* o el tamaño que prefieras */
+  height: 20px; /* o el tamaño que prefieras */
+  background-size: cover;
+}
+/*Fin el ul icons*/
 .line{
     background-color: #fff;
     height: 3px;
@@ -166,4 +213,10 @@ code {
 .inclinada{
   font-size: 15px;
   font-family: 'Courier New', monospace;
+}
+
+.hipervinculo{
+  text-decoration: underline;
+  padding-left: 20px;
+  font-family: 'Times New Roman', Times, serif;
 }
